@@ -1,0 +1,23 @@
+main {
+    position: relative;
+
+    >mat-progress-bar {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .double-block {
+        display: flex;
+        gap: 1rem;
+    }
+}
+
+mat-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+
+    >button {
+        padding: 0.5rem 1rem;
+    }
+}

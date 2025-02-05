@@ -2,7 +2,7 @@
   <mat-drawer #drawer class="sidenav" [opened]="true" mode="side">
     <div class="logo-container">
 
-      Platz für Logo
+    <img src="./assets/img/logoRemBg.png" alt="">
     </div>
 
     <ul>
@@ -20,8 +20,12 @@
       </mat-toolbar-row>
     </mat-toolbar>
     <div class="router-container">
-
-      <router-outlet></router-outlet>
+      <!-- @if (authService.user$) {
+        <router-outlet></router-outlet>
+      } @else {
+        <app-login></app-login>
+      } -->
+      
     </div>
   </div>
 

@@ -1,7 +1,4 @@
 <main>
-    @if (loading) {
-        <mat-progress-bar mode="indeterminate" value="40"></mat-progress-bar>
-    }
     <h2 mat-dialog-title>Add User</h2>
     <mat-dialog-content>
         
@@ -18,27 +15,10 @@
         <div>
             <mat-form-field class="full-width">
                 <mat-label>Birth Date</mat-label>
-                <input [disabled]="loading" [(ngModel)]="birthDate" matInput [matDatepicker]="picker">
+                <input [disabled]="loading" [(ngModel)]="user.birthDate" matInput [matDatepicker]="picker">
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-
-        </div>
-        <div>
-            <mat-form-field class="full-width">
-                <mat-label>Street + House No.</mat-label>
-                <input [disabled]="loading" [(ngModel)]="user.street" matInput placeholder="Adress">
-            </mat-form-field>
-        </div>
-        <div class="double-block">
-            <mat-form-field>
-                <mat-label>Zip Code</mat-label>
-                <input [disabled]="loading" [(ngModel)]="user.zipCode" matInput placeholder="City">
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>City</mat-label>
-                <input [disabled]="loading" [(ngModel)]="user.city" matInput placeholder="City">
             </mat-form-field>
         </div>
         <div>
@@ -51,6 +31,6 @@
     </mat-dialog-content>
     <mat-dialog-actions>
         <button [disabled]="loading" mat-button (click)="dialogRef.close()">Cancel</button>
-        <button [disabled]="loading" mat-button (click)="saveUser()" cdkFocusInitial>Save</button>
+        <button [disabled]="loading" mat-button (click)="saveUserInfo()" cdkFocusInitial>Save</button>
     </mat-dialog-actions>
 </main>

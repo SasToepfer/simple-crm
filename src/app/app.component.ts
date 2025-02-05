@@ -4,14 +4,22 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterModule, MatToolbarModule, MatSidenavModule, MatIconModule],
+  imports: [CommonModule, RouterModule, MatToolbarModule, MatSidenavModule, MatIconModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  providers: []
 })
 export class AppComponent {
   title = 'simple-crm';
+
+  constructor(public authService: AuthService) {}
+
+  // logout() {
+  //   this.authService.logout();
+  // }
 }

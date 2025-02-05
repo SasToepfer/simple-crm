@@ -1,0 +1,28 @@
+<main>
+    <h2 mat-dialog-title>Edit Address</h2>
+    <mat-dialog-content>
+        
+       
+        <div>
+            <mat-form-field class="full-width">
+                <mat-label>Street + House No.</mat-label>
+                <input [disabled]="loading" [(ngModel)]="user.street" matInput placeholder="Adress">
+            </mat-form-field>
+        </div>
+        <div class="double-block">
+            <mat-form-field>
+                <mat-label>Zip Code</mat-label>
+                <input [disabled]="loading" [(ngModel)]="user.zipCode" matInput placeholder="City">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>City</mat-label>
+                <input [disabled]="loading" [(ngModel)]="user.city" matInput placeholder="City">
+            </mat-form-field>
+        </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button [disabled]="loading" mat-button (click)="dialogRef.close()">Cancel</button>
+        <button [disabled]="loading" mat-button (click)="saveUserAddress()" cdkFocusInitial>Save</button>
+    </mat-dialog-actions>
+</main>

@@ -1,0 +1,29 @@
+<mat-card class="head-card" appearance="outlined">
+    <mat-card-content>
+        <button [matMenuTriggerFor]="userMenu" mat-icon-button>
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #userMenu="matMenu">
+            <button (click)="editUserDetail()" mat-menu-item>edit</button>
+        </mat-menu>
+        <img src="./assets/img/profileBlank.png" alt="">
+        <div>
+            <h2>{{ userData.firstName}} {{ userData.lastName}}<br></h2>
+            {{userData.eMail}}
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="content-card"  appearance="outlined">
+    <button [matMenuTriggerFor]="addressMenu" mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #addressMenu="matMenu">
+        <button (click)="editUserAddress()" mat-menu-item>edit</button>
+    </mat-menu>
+    <mat-card-content>
+        <h2>Address</h2>
+        {{userData.street}} <br>
+        {{userData.zipCode}} {{userData.city}}
+    </mat-card-content>
+</mat-card>

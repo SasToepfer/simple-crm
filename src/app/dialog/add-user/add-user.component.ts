@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule} from '@angular/material/input'
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -7,11 +7,12 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { IUser } from '../../interfaces/i-user';
 import { FormsModule } from '@angular/forms';
 import { DataBaseService } from '../../services/data-base.service';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-add-user',
   standalone: true,
-  imports: [FormsModule ,MatDialogModule, MatInputModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule],
+  imports: [FormsModule ,MatDialogModule, MatInputModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule, MatProgressBarModule],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.scss'
 })
@@ -23,14 +24,20 @@ export class AddUserComponent {
     street : "",
     zipCode : 0,
     city : "",
+    eMail : "",
+    id : "",
   };
  birthDate! : Date;
+ loading = false;
 
- constructor(private userDatabase: DataBaseService){}
+ constructor(public dialogRef: MatDialogRef<AddUserComponent> ,private userDatabase: DataBaseService){}
 
-  saveUser() {
+  async saveUser() {
+    this.loading = true;
     this.user.birthDate = this.birthDate.getTime();
-    this.userDatabase.addUserToDB(this.user);
-    
+    await this.userDatabase.addUserToDB(this.user).then((result:any) => {
+      this.loading = false;
+      this.dialogRef.close();
+    });
   }
 }
