@@ -55,8 +55,32 @@ ul {
     }
 }
 
-mat-toolbar,
-mat-toolbar-row {
-    min-height: 4rem;
-    height: 4rem;
+mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+
+    .toolbar-title {
+        min-height: 4rem;
+        height: 4rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .toolbar-logout {
+        min-height: 4rem;
+        height: 4rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        >button {
+            cursor: pointer;
+            background-color: transparent;
+            border-radius: 100%;
+
+            &:hover {
+                background-color: rgba($color: #ffffff, $alpha: 0.4);
+            }
+        }
+    }
 }

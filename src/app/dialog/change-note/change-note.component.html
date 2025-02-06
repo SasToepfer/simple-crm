@@ -1,0 +1,19 @@
+<main>
+    <h2 mat-dialog-title>Edit Note</h2>
+    <mat-dialog-content>
+        
+       
+        <div>
+            <mat-form-field class="full-width">
+                <mat-label>Note:</mat-label>
+                <input [disabled]="loading" [(ngModel)]="user.note" matInput placeholder="Note">
+            </mat-form-field>
+        </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button [disabled]="loading" mat-button (click)="dialogRef.close()">Cancel</button>
+        <button [disabled]="loading" mat-button (click)="saveUserNote()" cdkFocusInitial>Save</button>
+    </mat-dialog-actions>
+</main>
+

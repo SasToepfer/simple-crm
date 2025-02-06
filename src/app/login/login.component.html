@@ -1,13 +1,37 @@
-<form class="form flex flex-center">
+<form [formGroup]="loginForm" class="form flex flex-center">
+  @if (!isRegister) {
     <h3>Login</h3>
-    <mat-form-field class="form-field" appearance="outline">
-      <mat-label>Email</mat-label>
-      <input type="email" matInput formControlName="email">
-        
-    </mat-form-field>
-    <mat-form-field class="form-field" appearance="outline">
-        <mat-label>Password</mat-label>
-        
-    </mat-form-field>
-    <button mat-stroked-button (click)="onSubmit()">LOGIN</button>
+  } @else {
+    <h3>Registrierung</h3>
+  }
+
+  <mat-form-field class="form-field" appearance="outline">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput formControlName="email">
+    @if (loginForm.get("email")?.invalid && loginForm.get("email")?.touched) {
+      <mat-error>
+        Bitte gib eine gültige E-Mail ein.
+      </mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput formControlName="password">
+      @if (loginForm.get("password")?.invalid && loginForm.get("password")?.touched) {
+        <mat-error>
+          Passwort muss mindestens 6 Zeichen lang sein.
+        </mat-error>
+      }
+  </mat-form-field>
+
+  <button mat-stroked-button [disabled]="loginForm.invalid" (click)="onSubmit()">
+    {{ isRegister ? 'Registrieren' : 'Login' }}
+  </button>
+
+  <p>
+    <a (click)="toggleMode()">
+      {{ isRegister ? 'Bereits registriert? Einloggen' : 'Noch kein Konto? Registrieren' }}
+    </a>
+  </p>
 </form>

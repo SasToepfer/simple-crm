@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -15,17 +15,26 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class LoginComponent {
   isRegister = false;
-  email = '';
-  password = '';
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)])
+  });
 
   constructor(private auth: AuthService, private router: Router) {}
 
+  toggleMode() {
+    this.isRegister = !this.isRegister;
+  }
+
   async onSubmit() {
+    const email = this.loginForm.value.email ?? '';
+    const password = this.loginForm.value.password ?? '';
+
     try {
       if (this.isRegister) {
-        await this.auth.register(this.email, this.password);
+        await this.auth.register(email, password);
       } else {
-        await this.auth.login(this.email, this.password);
+        await this.auth.login(email, password);
       }
       this.router.navigate(['/dashboard']);
     } catch (error) {

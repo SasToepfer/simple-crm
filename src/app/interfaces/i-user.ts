@@ -7,4 +7,5 @@ export interface IUser {
     city?: string;
     eMail?: string;
     id?: any;
+    note?: string;
 }

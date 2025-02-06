@@ -1,22 +1,40 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {  AuthService } from '../services/auth.service';
-import { map } from 'rxjs';
+import { combineLatest, filter, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard {
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
+
+  // canActivate() {
+  //   return this.authService.user$.pipe(
+  //     map((user) => {
+  //       if (user) {
+  //         return true;
+  //       } else {
+  //         this.router.navigate(['/login']);
+  //         return false;
+  //       }
+  //     })
+  //   );
+  // }
 
   canActivate() {
-    return this.auth.user$.pipe(
-      map(user => {
+    return combineLatest([
+      this.authService.authInitialized,  // Observable<boolean>
+      this.authService.user$
+    ]).pipe(
+      filter(([initialized, _]) => initialized), // erst weitermachen, wenn initialisiert
+      map(([_, user]) => {
         if (user) {
-          this.router.navigate(['/dashboard']);
+          return true;
+        } else {
+          this.router.navigate(['/login']);
           return false;
         }
-        return true;
       })
     );
   }

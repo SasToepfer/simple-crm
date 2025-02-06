@@ -7,13 +7,14 @@
                 <th>City</th>
             </tr>
             @for (user of users; track $index) {
-                <tr [routerLink]="['/user/', user.id]">
-                    <td>{{user.firstName}} {{ user.lastName}}</td>
-                    <td>{{user.eMail}}</td>
-                    <td>{{user.city}}</td>
+                <tr >
+                    <td [routerLink]="['/user/', user.id]">{{user.firstName}} {{ user.lastName}}</td>
+                    <td [routerLink]="['/user/', user.id]">{{user.eMail}}</td>
+                    <td [routerLink]="['/user/', user.id]">{{user.city}}</td>
+                    <td><mat-icon (click)="deleteUser(user.id)" >delete</mat-icon></td>
                 </tr>
+               
             }
-
         </table>
     </mat-card-content>
   </mat-card>

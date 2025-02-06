@@ -6,8 +6,7 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { provideAuth } from '@angular/fire/auth';
-import { getAuth } from 'firebase/auth';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 import { environment } from '../environments/envirionment';
 
 export const appConfig: ApplicationConfig = {

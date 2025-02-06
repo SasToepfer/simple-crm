@@ -19,19 +19,37 @@ import { RouterModule } from '@angular/router';
 })
 export class UserComponent {
   readonly dialog = inject(MatDialog);
-  users: IUser[] = [];
+  users:IUser[] = [];
 
   constructor(private userDatabase: DataBaseService) {}
 
-  ngOnInit():void {
+  
+  // ngOnInit():void {
+  //   this.users = this.userDatabase.userList;
+  //   console.log(this.users);
     
-    this.userDatabase.getUsers().subscribe(users => {
-      this.users = users;
-    })
-    
+  // }
+  // ngOnInit(): void {
+  //   this.userDatabase.unsubUsers = this.userDatabase.subUsersList();
+  
+  //   // Firestore-Änderungen abfangen
+  //   setTimeout(() => {
+  //     this.users = this.userDatabase.userList;
+  //     console.log("Users in Component:", this.users); // Debug
+  //   }, 1000); // Warten, bis Firestore antwortet
+  // }
+  ngOnInit(): void {
+    this.userDatabase.users$.subscribe((userList) => {
+      this.users = userList;
+    });
   }
   
   openDialog() {
     this.dialog.open(AddUserComponent);
+  }
+
+  deleteUser(id: string) {
+    this.userDatabase.deleteUser(id)
+    
   }
 }

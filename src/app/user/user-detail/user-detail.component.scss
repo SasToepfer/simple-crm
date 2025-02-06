@@ -63,3 +63,16 @@
     }
 }
 
+.note-card {
+    position: relative;
+    margin-top: 2rem;
+
+    h2 {
+        margin-bottom: 0;
+    }
+
+    >button {
+        @include moreVertButton();
+    }
+}
+
