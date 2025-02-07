@@ -2,7 +2,15 @@
     <h2 mat-dialog-title>Edit Address</h2>
     <mat-dialog-content>
         
-       
+       <div>
+            <mat-form-field class="full-width">
+                <mat-label>Birth Date</mat-label>
+                <input [disabled]="loading" [(ngModel)]="birthDate" matInput [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
         <div>
             <mat-form-field class="full-width">
                 <mat-label>Street + House No.</mat-label>
@@ -19,6 +27,7 @@
                 <input [disabled]="loading" [(ngModel)]="user.city" matInput placeholder="City">
             </mat-form-field>
         </div>
+
 
     </mat-dialog-content>
     <mat-dialog-actions>

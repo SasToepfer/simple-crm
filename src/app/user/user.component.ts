@@ -23,21 +23,6 @@ export class UserComponent {
 
   constructor(private userDatabase: DataBaseService) {}
 
-  
-  // ngOnInit():void {
-  //   this.users = this.userDatabase.userList;
-  //   console.log(this.users);
-    
-  // }
-  // ngOnInit(): void {
-  //   this.userDatabase.unsubUsers = this.userDatabase.subUsersList();
-  
-  //   // Firestore-Änderungen abfangen
-  //   setTimeout(() => {
-  //     this.users = this.userDatabase.userList;
-  //     console.log("Users in Component:", this.users); // Debug
-  //   }, 1000); // Warten, bis Firestore antwortet
-  // }
   ngOnInit(): void {
     this.userDatabase.users$.subscribe((userList) => {
       this.users = userList;

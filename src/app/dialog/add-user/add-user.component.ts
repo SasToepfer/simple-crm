@@ -27,14 +27,15 @@ export class AddUserComponent {
     eMail : "",
     id : "",
   };
- birthDate! : Date;
+  birthDate: Date | null = null;
  loading = false;
 
  constructor(public dialogRef: MatDialogRef<AddUserComponent> ,private userDatabase: DataBaseService){}
 
   async saveUser() {
     this.loading = true;
-    this.user.birthDate = this.birthDate.getTime();
+    this.user.birthDate = this.birthDate ? this.birthDate.getTime() : 0;
+    
     await this.userDatabase.addUserToDB(this.user).then((result:any) => {
       this.loading = false;
       this.dialogRef.close();

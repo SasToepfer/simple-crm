@@ -1,0 +1,118 @@
+<header>
+    <section class="content-distance">
+        <div>
+            <img class="head-logo" src="./assets/img/Drachenstube_logo.png" alt="logo">
+            <h1> Drachenstube</h1>
+        </div>
+        <nav>
+            <a href="#main-dishes">Essen</a>
+            <a href="#main-desserts">Desserts</a>
+            <a href="#mainDrinks">Getränke</a>
+        </nav>
+
+        <!-- <img src="./assets/img/shopping_icon.png" class="basket-opener" onclick="showBasketMobile()"> -->
+    </section>
+</header>
+<main>
+    <div class="content-wrapper">
+        <section id="content" class="content">
+            <div class="atf-image">
+
+            </div>
+            <div class="content-dishes">
+                <div class="content-distance block-border">
+                    <h2>Drachenstube</h2>
+                    <p>Bewertung 4.2 von 5 Sternen</p>
+                </div>
+                <img class="content-dish-image" src="./assets/img/mains.png" alt="">
+                @for (item of myFoods; track $index) {
+                <div class="dish-block block-border content-distance">
+                    <div>
+                        <h3>{{item.name}}</h3>
+                        <p class="description">{{item.description}}</p>
+                        <p class="price">{{item.price}}</p>
+                    </div>
+                    <img class="add-btn" (click)="addToBasket(item)" src="./assets/img/plus.png" alt="add">
+                </div>
+                }
+                <img class="content-dish-image" src="./assets/img/dessert2.png" alt="">
+                @for (item of myDesserts; track $index) {
+                <div class="dish-block block-border content-distance">
+                    <div>
+                        <h3>{{item.name}}</h3>
+                        <p class="description">{{item.description}}</p>
+                        <p class="price">{{item.price}}</p>
+                    </div>
+                    <img class="add-btn" (click)="addToBasket(item)" src="./assets/img/plus.png" alt="add">
+                </div>
+                }
+                <img id="mainDrinks" class="content-dish-image" src="./assets/img/drinks.png" alt="">
+                @for (item of myDrinks; track $index) {
+                <div class="dish-block block-border content-distance">
+                    <div>
+                        <h3>{{item.name}}</h3>
+                        <p class="description">{{item.description}}</p>
+                        <p class="price">{{item.price}}</p>
+                    </div>
+                    <img class="add-btn" (click)="addToBasket(item)" src="./assets/img/plus.png" alt="add">
+                </div>
+                }
+            </div>
+        </section>
+        <section class="basket-wrapper basket-wrapper-closed">
+            <div class="basket">
+                <h2>Warenkorb</h2>
+                @for (item of myBasket; track $index) {
+                <div class="basket-single-item-wrapper block-border">
+                    <h3>{{item.name}}</h3>
+                    <div class="basket-single-item">
+                        <div class="add-remove">
+                            <img class="add-btn" (click)="subtractFromBasket(item)" src="./assets/img/minus.png"
+                                alt="minus">
+                            {{item.basketAmount}}
+                            <img class="add-btn" (click)="addToBasket(item)" src="./assets/img/plus.png" alt="plus">
+                        </div>
+                        {{(item.price * item.basketAmount).toFixed(2)}} €
+                        <img class="add-btn" (click)="removeFromBasket(item)" src="./assets/img/trash.png" alt="delete">
+                    </div>
+                </div>
+                }
+                @if (preSum) {
+                    <div class="sub-sum small-content-distance">
+                        Pre-Sum: {{preSum}} €
+                    </div>
+
+                    @if (preSum <= 50) { 
+                        <div class="final-sum small-content-distance">
+                        Delivery-Fee: {{deliveryFee}} €
+                    </div>
+                    }
+
+                <hr>
+                <div class="final-sum small-content-distance">
+                    Final-Sum: {{finalSum.toFixed(2)}} €
+                </div>
+                }
+                <div class="order-wrapper">
+                    <button (click)="toggleOrderDialog()">Bestellen</button>
+                </div>
+            </div>
+            
+        </section>
+    </div>
+    
+
+    @if (orderShown) {
+        <div id="order-overlay" class="order-overlay">
+            <div class="order-overlay-container">
+                <span id="dialog-text">Danke für ihre Bestellung</span>
+                <button (click)="toggleOrderDialog()">close</button>
+            </div>
+        </div>
+    }
+
+    
+    <div class="order-mobile-button-container">
+
+    </div>
+</main>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, User } from '@angular/fire/auth';
+import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, User, signInAnonymously } from '@angular/fire/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -21,6 +21,10 @@ export class AuthService {
     const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
     this.userSubject.next(userCredential.user); // Manuelles Update
     return userCredential;
+  }
+
+  async loginGuest() {
+    return signInAnonymously(this.auth);
   }
 
   async register(email: string, password: string) {

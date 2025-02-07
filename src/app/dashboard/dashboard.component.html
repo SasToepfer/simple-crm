@@ -1,1 +1,56 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+    <!-- Kennzahlenübersicht -->
+    <mat-grid-list class="topics" cols="2" rowHeight="100px" gutterSize="16px">
+      <mat-grid-tile>
+        <mat-card>
+          <mat-card-title>Kunden</mat-card-title>
+          <mat-card-content>
+            <h2>123</h2>
+            <p>Gesamtanzahl der Kunden</p>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-card>
+          <mat-card-title>Neue Leads</mat-card-title>
+          <mat-card-content>
+            <h2>45</h2>
+            <p>Diese Woche</p>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <!-- Weitere Kennzahlen können hier hinzugefügt werden -->
+    </mat-grid-list>
+  
+    <!-- Diagramm-/Chart-Bereich -->
+    <div class="charts-section" style="margin-top: 16px;">
+      <mat-card>
+        <mat-card-title>Umsatztrend</mat-card-title>
+        <mat-card-content>
+          <!-- Hier könntest du z.B. eine Chart-Komponente einfügen -->
+          <div class="chart-container">
+            <canvas baseChart
+                    [data]="lineChartData"
+                    [options]="lineChartOptions"
+                    [legend]="true"
+                    chartType="line">
+            </canvas>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  
+    <!-- Letzte Aktivitäten -->
+    <div class="recent-activities" style="margin-top: 16px;">
+      <mat-card>
+        <mat-card-title>Letzte Aktivitäten</mat-card-title>
+        <mat-card-content>
+          <ul>
+            <li>Kunde A wurde hinzugefügt</li>
+            <li>Aufgabe X abgeschlossen</li>
+            <li>Termin mit Kunde B geplant</li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>

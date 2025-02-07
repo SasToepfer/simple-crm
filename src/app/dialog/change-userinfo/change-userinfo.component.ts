@@ -4,13 +4,11 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-change-userinfo',
   standalone: true,
-  imports: [FormsModule ,MatDialogModule, MatInputModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule],
+  imports: [FormsModule ,MatDialogModule, MatInputModule, MatFormFieldModule],
   templateUrl: './change-userinfo.component.html',
   styleUrl: './change-userinfo.component.scss'
 })

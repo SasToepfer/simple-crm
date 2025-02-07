@@ -28,30 +28,7 @@ export class DataBaseService {
       this.usersSubject.next(updatedUsers); // Nutzerliste updaten
     });
   }
-  // subUsersList() {
-  //   return onSnapshot(this.getUsersRef(), (snapshot) => {
-  //     // console.log("Firestore liefert:", snapshot.docs.length, "Dokumente"); // Debug-Ausgabe
   
-  //     const updatedUsers: IUser[] = [];
-  
-  //     snapshot.forEach((doc) => {
-  //       updatedUsers.push(this.setUserData(doc.data(), doc.id));
-  //     });
-  
-  //     this.userList = updatedUsers; // Liste ersetzen
-  //     // console.log("Aktualisierte Nutzerliste:", this.userList);
-  //   });
-  // }
-  // subUsersList() {
-  //   return onSnapshot(this.getUsersRef(), (list) => {
-  //     this.userList = [];
-  //     list.forEach(element => {
-  //       this.userList.push(this.setUserData(element.data(), element.id));
-
-  //     })
-  //   });
-  // }
-
   setUserData(obj: any, id: string): IUser {
     return {
       firstName: obj.firstName || "",
@@ -109,9 +86,5 @@ export class DataBaseService {
     await deleteDoc(this.getSingleDocRef(userId)).catch(
       (err) => (console.log(err))
     );
-  }
-
-  ngonDestroy() {
-    // this.unsubUsers();
   }
 }

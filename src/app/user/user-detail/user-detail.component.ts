@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
 import { DataBaseService } from '../../services/data-base.service';
@@ -23,7 +23,7 @@ export class UserDetailComponent {
   birthDate!: any;
   readonly dialog = inject(MatDialog);
 
-  constructor(private route: ActivatedRoute, private userDatabase: DataBaseService) {
+  constructor(private route: ActivatedRoute, private userDatabase: DataBaseService, private cdRef: ChangeDetectorRef) {
   }
 
   ngOnInit():void {
@@ -42,9 +42,12 @@ export class UserDetailComponent {
       }
     });
   }
+  
 
   get formattedBirthDate(): string {
-    return this.birthDate ? this.birthDate.toLocaleDateString('de-DE') : '';
+    return this.birthDate instanceof Date && !isNaN(this.birthDate.getTime()) 
+    ? this.birthDate.toLocaleDateString('de-DE') 
+    : 'Kein Datum gesetzt';
   }
   
 
@@ -55,24 +58,13 @@ export class UserDetailComponent {
   
     dialog.afterClosed().subscribe((result) => {
       if (result) {
-        this.userData = result; // Daten in der UserDetailComponent aktualisieren
-        this.userDatabase.updateUser(this.userId, result); // Änderungen in Firebase speichern
+        this.userData = result; // Daten aktualisieren
+        this.birthDate = new Date(this.userData.birthDate ?? 0); // Geburtstdatum explizit aktualisieren
+      this.userDatabase.updateUser(this.userId, result); // In Firebase speichern
+      this.cdRef.detectChanges(); // ⬅️ Manuelle Aktualisierung auslösen
       }
     });
   }
-
-  // editUserAddress(component: Component) {
-  //   const dialog = this.dialog.open(ChangeAddressComponent, {
-  //     data: { user: { ...this.userData } } // Kopie des Objekts übergeben
-  //   });
-  
-  //   dialog.afterClosed().subscribe((result) => {
-  //     if (result) {
-  //       this.userData = result; // Daten in der UserDetailComponent aktualisieren
-  //       this.userDatabase.updateUser(this.userId, result); // Änderungen in Firebase speichern
-  //     }
-  //   });
-  // }
 
   getComponentToDisplay(name: string):any {
     switch (name) {
